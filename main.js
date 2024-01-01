@@ -1,4 +1,6 @@
 function facedown() {
+	document.getElementById('startButton').style.display = 'none';
+
 	const images = document.querySelectorAll('div.letters > img');
 
 	// Creating a randomized array
@@ -33,17 +35,19 @@ function makeup(answers) {
 	const images = document.querySelectorAll('div.letters > img');
 	[...images].forEach((image, index) => {
 		image.addEventListener('click', function() {
-			console.log(index, i);
+			// Checking if user correctly picked the cards
 			if (answers[index] == i) {
 				score += 20;
 				if (score == 100) {
 					updateScore(100);
+					makeUnclickable();
 					document.getElementById('winParagraph').style.display = 'inline-block';
 					makeRestartVisible();
 				}
 				updateScore(score);
 			}
 			else {
+				makeUnclickable();
 				document.getElementById('loseParagraph').style.display = 'inline-block';
 				document.getElementById('scoreTag').style.display = 'none';
 				makeRestartVisible();
@@ -66,7 +70,6 @@ function makeRestartVisible() {
 	start.style.display = "none";
 }
 
-function toggleClickability() {
-	const images = document.querySelectorAll('div.letters > img');
-	images.forEach(image => image.classList.toggle)
+function makeUnclickable() {
+	document.getElementById('image-container').style.pointerEvents = 'none';
 }
